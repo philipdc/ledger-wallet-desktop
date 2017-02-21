@@ -57,7 +57,7 @@ add_subdirectory(${CEF_ROOT}/tests/cefsimple)
 add_subdirectory(${CEF_ROOT}/tests/gtest)
 add_subdirectory(${CEF_ROOT}/tests/ceftests)
 
-# TODO: Include other application targets here.
+add_subdirectory(container)
 
 # Display configuration settings.
 PRINT_CEF_CONFIG()
