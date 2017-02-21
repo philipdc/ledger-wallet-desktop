@@ -76,7 +76,7 @@ set(CEFSIMPLE_RESOURCES_SRCS
 #
 
 # Target executable names.
-set(CEF_TARGET "Ledger Wallet")
+set(CEF_TARGET "ledger_wallet")
 if(OS_MACOSX)
   set(CEF_HELPER_TARGET "Ledger Wallet Helper")
 endif()
