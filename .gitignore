@@ -46,3 +46,4 @@ Thumbs.db
 /build
 # CEF download directory
 /third_party/cef/
+.idea
