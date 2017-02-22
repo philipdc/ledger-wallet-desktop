@@ -78,6 +78,7 @@ set(CEFSIMPLE_RESOURCES_SRCS
 # Target executable names.
 set(CEF_TARGET "ledger_wallet")
 if(OS_MACOSX)
+  set(CEF_TARGET "Ledger Wallet")
   set(CEF_HELPER_TARGET "Ledger Wallet Helper")
 endif()
 
@@ -198,3 +199,14 @@ if(OS_WINDOWS)
   COPY_FILES("${CEF_TARGET}" "${CEF_BINARY_FILES}" "${CEF_BINARY_DIR}" "${CEF_TARGET_OUT_DIR}")
   COPY_FILES("${CEF_TARGET}" "${CEF_RESOURCE_FILES}" "${CEF_RESOURCE_DIR}" "${CEF_TARGET_OUT_DIR}")
 endif()
+
+# Find includes in corresponding build directories
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+# Instruct CMake to run moc automatically when needed.
+set(CMAKE_AUTOMOC ON)
+
+# Find the QtWidgets library
+find_package(Qt5Widgets)
+
+# Use the Widgets module from Qt 5.
+target_link_libraries(${CEF_TARGET} Qt5::Widgets)

@@ -6,11 +6,12 @@
 
 cmake_minimum_required(VERSION 2.8.12.1)
 
+set(CMAKE_CXX_STANDARD 14)
 # Only generate Debug and Release configuration types.
 set(CMAKE_CONFIGURATION_TYPES Debug Release)
 
 # Project name.
-project(cef)
+project(ledger-wallet-desktop)
 
 # Use folders in the resulting project files.
 set_property(GLOBAL PROPERTY OS_FOLDERS ON)
