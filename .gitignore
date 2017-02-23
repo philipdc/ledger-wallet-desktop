@@ -47,3 +47,4 @@ Thumbs.db
 # CEF download directory
 /third_party/cef/
 .idea
+cmake-build-debug/
