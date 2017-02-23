@@ -2,24 +2,30 @@
 # reserved. Use of this source code is governed by a BSD-style license that
 # can be found in the LICENSE file.
 
+# Find includes in corresponding build directories
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+# Instruct CMake to run moc automatically when needed.
+set(CMAKE_AUTOMOC ON)
+
 #
 # Source files.
 #
 
 # cefsimple sources.
-set(CEFSIMPLE_SRCS
-  simple_app.cc
-  simple_app.h
-  simple_handler.cc
-  simple_handler.h
-  )
+set(
+        CEFSIMPLE_SRCS
+        simple_app.cc simple_app.h simple_handler.cc simple_handler.h
+        src/app/LedgerApplication.cpp src/app/LedgerApplication.hpp
+        src/cef/LedgerCefHandler.cpp src/cef/LedgerCefHandler.hpp src/cef/LedgerCefRunLoop.cpp src/cef/LedgerCefRunLoop.hpp)
+
+
 set(CEFSIMPLE_SRCS_LINUX
   cefsimple_linux.cc
   simple_handler_linux.cc
   )
 set(CEFSIMPLE_SRCS_MACOSX
-  cefsimple_mac.mm
   simple_handler_mac.mm
+        src/main_mac.mm
   )
 set(CEFSIMPLE_SRCS_WINDOWS
   cefsimple.exe.manifest
@@ -67,8 +73,7 @@ source_group(cefsimple\\\\mac\\\\English.lproj FILES ${CEFSIMPLE_RESOURCES_MAC_E
 
 set(CEFSIMPLE_RESOURCES_SRCS
   ${CEFSIMPLE_RESOURCES_MAC_SRCS}
-  ${CEFSIMPLE_RESOURCES_MAC_ENGLISH_LPROJ_SRCS}
-  )
+  ${CEFSIMPLE_RESOURCES_MAC_ENGLISH_LPROJ_SRCS})
 
 
 #
@@ -199,11 +204,6 @@ if(OS_WINDOWS)
   COPY_FILES("${CEF_TARGET}" "${CEF_BINARY_FILES}" "${CEF_BINARY_DIR}" "${CEF_TARGET_OUT_DIR}")
   COPY_FILES("${CEF_TARGET}" "${CEF_RESOURCE_FILES}" "${CEF_RESOURCE_DIR}" "${CEF_TARGET_OUT_DIR}")
 endif()
-
-# Find includes in corresponding build directories
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-# Instruct CMake to run moc automatically when needed.
-set(CMAKE_AUTOMOC ON)
 
 # Find the QtWidgets library
 find_package(Qt5Widgets)
