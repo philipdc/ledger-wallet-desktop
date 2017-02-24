@@ -1,6 +1,6 @@
 /*
  *
- * LedgerApplication
+ * mac_application
  * ledger-wallet-desktop
  *
  * Created by Pierre Pollastri on 23/02/2017.
@@ -28,36 +28,14 @@
  * SOFTWARE.
  *
  */
-#ifndef LEDGER_WALLET_DESKTOP_LEDGERAPPLICATION_HPP
-#define LEDGER_WALLET_DESKTOP_LEDGERAPPLICATION_HPP
 
-#include <QApplication>
-#include <QMainWindow>
-#include <QObject>
-#include "../cef/LedgerCefHandler.hpp"
-#include "include/cef_app.h"
-#include "../cef/LedgerCefRunLoop.hpp"
+#import <Cocoa/Cocoa.h>
+#include "../app/LedgerApplication.hpp"
 
-class LedgerApplication : public CefApp, public CefBrowserProcessHandler {
-public:
-    LedgerApplication(QApplication& application, CefMainArgs& args);
-
-    void customizeWindow();
-
-    virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() OVERRIDE;
-    virtual void OnContextInitialized() OVERRIDE;
-
-    int run();
-
-    ~LedgerApplication();
-private:
-    QApplication& _application;
-    CefMainArgs& _args;
-    QMainWindow _window;
-    LedgerCefRunLoop* _cefRunLoop;
-    CefRefPtr<LedgerCefHandler> _handler;
-    IMPLEMENT_REFCOUNTING(LedgerApplication);
-};
-
-
-#endif //LEDGER_WALLET_DESKTOP_LEDGERAPPLICATION_HPP
+void LedgerApplication::customizeWindow() {
+    NSView* view = (NSView*)_window.winId();
+    NSWindow* window = [view window];
+    [window setTitlebarAppearsTransparent: YES];
+    [window setTitleVisibility: NSWindowTitleHidden];
+    [window setStyleMask: [window styleMask] | NSFullSizeContentViewWindowMask];
+}

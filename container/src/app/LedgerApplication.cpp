@@ -46,6 +46,8 @@ CefRefPtr<CefBrowserProcessHandler> LedgerApplication::GetBrowserProcessHandler(
 
 void LedgerApplication::OnContextInitialized() {
     CEF_REQUIRE_UI_THREAD();
+    _window.show();
+    customizeWindow();
 
     CefBrowserSettings settings;
     CefWindowInfo info;
@@ -57,21 +59,17 @@ void LedgerApplication::OnContextInitialized() {
 #else
 
 #endif
-
     CefBrowserHost::CreateBrowser(info, LedgerCefHandler::getInstance(), "https://google.fr", settings,
                                   NULL);
 }
 
 
 int LedgerApplication::run() {
-    _window.show();
     CefSettings settings;
     CefInitialize(_args, settings, this, NULL);
-
     _cefRunLoop->start();
     int ret = _application.exec();
     _cefRunLoop->stop();
-    //CefShutdown();
     return ret;
 }
 

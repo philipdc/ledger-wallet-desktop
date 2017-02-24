@@ -26,6 +26,7 @@ set(CEFSIMPLE_SRCS_LINUX
 set(CEFSIMPLE_SRCS_MACOSX
   simple_handler_mac.mm
         src/main_mac.mm
+        src/platform/mac_application.mm
   )
 set(CEFSIMPLE_SRCS_WINDOWS
   cefsimple.exe.manifest
