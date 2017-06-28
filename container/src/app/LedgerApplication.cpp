@@ -34,6 +34,8 @@
 #include "include/views/cef_browser_view.h"
 #include "include/views/cef_window.h"
 #include "include/wrapper/cef_helpers.h"
+#include "winsparkle.h"
+
 
 LedgerApplication::LedgerApplication(QApplication &application, CefMainArgs &args)
         : _application(application), _args(args) {
@@ -56,6 +58,8 @@ void LedgerApplication::OnContextInitialized() {
     info.SetAsChild((NSView *)_window.winId(), 0, 0, _window.size().width(), _window.size().height());
 #elif defined(OS_WIN)
     info.SetAsPopup(NULL, "Ledger Wallet");
+    win_sparkle_set_appcast_url("https://winsparkle.org/example/appcast.xml");
+    win_sparkle_init()
 #else
 
 #endif
@@ -74,5 +78,6 @@ int LedgerApplication::run() {
 }
 
 LedgerApplication::~LedgerApplication() {
+    win_sparkle_cleanup();
     delete _cefRunLoop;
 }
